@@ -26,7 +26,8 @@
 		"symfony/cache": "^8.0",
 		"symfony/cache-contracts": "^3.6",
 		"symfony/console": "^7.4",
-		"symfony/string": "^8.0"
+		"symfony/string": "^8.0",
+		"symfony/var-exporter": "^7.0"
 	},
 	"require-dev": {
 		"doctrine/data-fixtures": "^2.2",
