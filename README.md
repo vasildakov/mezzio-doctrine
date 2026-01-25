@@ -1,8 +1,13 @@
 # Mezzio Doctrine ORM
 
+[![Coverage Status](https://coveralls.io/repos/github/vasildakov/mezzio-doctrine/badge.svg?branch=develop)](https://coveralls.io/github/vasildakov/mezzio-doctrine?branch=develop)
+
+## Synopsis
+
 Simple Doctrine ORM integration for Mezzio.
 
-# Using
+
+# Installation
 
 Install package via composer
 ```bash
