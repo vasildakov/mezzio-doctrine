@@ -1,11 +1,12 @@
 # Mezzio Doctrine ORM
 
-Simple Mezzio Doctrine ORM integration.
+Simple Doctrine ORM integration for Mezzio.
 
 # Using
+
 Install package via composer
 ```bash
-composer require vasildakov/mezzio-doctrine-orm
+composer require vasildakov/mezzio-doctrine
 ```
 
 ## Configuration
@@ -109,8 +110,4 @@ $ vendor/bin/laminas doctrine:migrations:migrate
 doctrine:fixtures:load                     Load data fixtures
 ```
 
-# TODO
 
-1. Tests
-2. Split this library into separate DBAL, ORM and Migrations libraries
-3. Add libraries support (auth, pagination etc)

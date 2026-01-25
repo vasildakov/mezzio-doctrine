@@ -12,6 +12,9 @@ use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\Console\Command\Command;
 use VasilDakov\Doctrine\Exception\ServiceNotFoundException;
 
+/**
+ * Factory for Doctrine ORM Console Commands
+ */
 final class DoctrineOrmCommandFactory
 {
     /**

@@ -40,11 +40,6 @@ return [
             'type' => 'filesystem',
             'path' => __DIR__ . '/../../data/cache/doctrine',
         ],
-        'fixtures'   => [
-            'paths' => [
-                __DIR__ . '/../../data/fixtures',
-            ],
-        ],
         'migrations' => [
             'directory'     => __DIR__ . '/../../data/migrations',
             'namespace'     => 'App\Migrations',
