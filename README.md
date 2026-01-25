@@ -1,20 +1,23 @@
-# Mezzio Doctrine ORM
+# Doctrine ORM integration for Mezzio.
 
 [![CI](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml)
-[![Coverage Status](https://coveralls.io/repos/github/vasildakov/mezzio-doctrine/badge.svg?branch=develop)](https://coveralls.io/github/vasildakov/mezzio-doctrine?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/vasildakov/mezzio-doctrine/badge.svg?branch=main)](https://coveralls.io/github/vasildakov/mezzio-doctrine?branch=develop)
 [![Latest Stable Version](http://poser.pugx.org/vasildakov/mezzio-doctrine/v)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
 [![Total Downloads](http://poser.pugx.org/vasildakov/mezzio-doctrine/downloads)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
 [![Latest Unstable Version](http://poser.pugx.org/vasildakov/mezzio-doctrine/v/unstable)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
 [![License](http://poser.pugx.org/vasildakov/mezzio-doctrine/license)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
 [![PHP Version Require](http://poser.pugx.org/vasildakov/mezzio-doctrine/require/php)](https://packagist.org/packages/vasildakov/mezzio-doctrine)
+
 ## Synopsis
 
-Simple Doctrine ORM integration for Mezzio.
+Doctrine ORM integration for Mezzio. This package provides integration with
+Doctrine ORM 3.x, Doctrine Migrations, and Doctrine Fixtures.
 
 
-# Installation
+## Installation
 
 Install package via composer
+
 ```bash
 composer require vasildakov/mezzio-doctrine
 ```
@@ -38,6 +41,7 @@ $aggregator = new ConfigAggregator([
 
 
 ### Example Configuration
+
 ```php
 <?php
 declare(strict_types=1);
@@ -120,4 +124,17 @@ $ vendor/bin/laminas doctrine:migrations:migrate
 doctrine:fixtures:load                     Load data fixtures
 ```
 
+## Tests
 
+Run the tests with code coverage
+```bash
+XDEBUG_MODE=coverage vendor/bin/phpunit 
+```
+
+## Author
+
+Vasil Dakov - <vasildakov@gmail.com> - <https://vasildakov.com><br />
+
+## License
+
+Package is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

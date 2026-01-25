@@ -1,6 +1,6 @@
 {
 	"name": "vasildakov/mezzio-doctrine",
-	"description": "Simple Laminas/Mezzio Doctrine ORM integration",
+	"description": "Doctrine ORM integration for Mezzio",
 	"license": "MIT",
 	"type": "library",
 	"keywords": [
