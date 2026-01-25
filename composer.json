@@ -1,8 +1,8 @@
 {
 	"name": "vasildakov/mezzio-doctrine",
-	"type": "library",
 	"description": "Simple Laminas/Mezzio Doctrine ORM integration",
-	"license": "BSD-3-Clause",
+	"license": "MIT",
+	"type": "library",
 	"keywords": [
 		"doctrine",
 		"orm",
@@ -17,24 +17,28 @@
 		}
 	],
 	"require": {
-		"php": "^8.1 || ^8.2 || ^8.3 || ^8.4",
-		"psr/container": "^1.0 || ^2.0",
-		"doctrine/orm": "^3.0.0",
+		"php": "^8.1",
 		"doctrine/migrations": "^3.9",
+		"doctrine/orm": "^3.0.0",
 		"laminas/laminas-cli": "^1.0.0",
-		"laminas/laminas-servicemanager": "~3.3 || ~4.0",
+		"laminas/laminas-servicemanager": "^3.3 || ^4.0",
+		"psr/container": "^1.0 || ^2.0",
 		"symfony/cache": "^8.0",
-		"symfony/string": "^8.0",
 		"symfony/cache-contracts": "^3.6",
-		"symfony/console": "^7.4"
+		"symfony/console": "^7.4",
+		"symfony/string": "^8.0"
 	},
 	"require-dev": {
+		"doctrine/data-fixtures": "^2.2",
+		"ergebnis/composer-normalize": "^2.48",
+		"php-coveralls/php-coveralls": "^2.9",
+		"phpunit/phpcov": "^10.0",
 		"phpunit/phpunit": "^8.5 || ^9.0 || ^10.0 || ^11.0",
 		"squizlabs/php_codesniffer": "^3.5.0",
-		"symfony/var-dumper": "^8.0",
-		"doctrine/data-fixtures": "^2.2",
-		"php-coveralls/php-coveralls": "^2.9",
-		"phpunit/phpcov": "^10.0"
+		"symfony/var-dumper": "^8.0"
+	},
+	"suggest": {
+		"doctrine/migrations": "doctrine migrations if you want to keep your schema definitions versioned"
 	},
 	"autoload": {
 		"psr-4": {
@@ -46,8 +50,11 @@
 			"VasilDakov\\DoctrineTest\\": "test/"
 		}
 	},
-	"suggest": {
-		"doctrine/migrations": "doctrine migrations if you want to keep your schema definitions versioned"
+	"config": {
+		"allow-plugins": {
+			"composer/package-versions-deprecated": true,
+			"ergebnis/composer-normalize": true
+		}
 	},
 	"scripts": {
 		"check": [
@@ -58,10 +65,5 @@
 		"cs-fix": "phpcbf",
 		"test": "phpunit --colors=always",
 		"test-coverage": "phpunit --coverage-clover build/clover.xml"
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/package-versions-deprecated": true
-		}
 	}
 }

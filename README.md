@@ -1,7 +1,11 @@
 # Mezzio Doctrine ORM
 
 [![Coverage Status](https://coveralls.io/repos/github/vasildakov/mezzio-doctrine/badge.svg?branch=develop)](https://coveralls.io/github/vasildakov/mezzio-doctrine?branch=develop)
-
+[![Latest Stable Version](http://poser.pugx.org/vasildakov/mezzio-doctrine/v)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
+[![Total Downloads](http://poser.pugx.org/vasildakov/mezzio-doctrine/downloads)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
+[![Latest Unstable Version](http://poser.pugx.org/vasildakov/mezzio-doctrine/v/unstable)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
+[![License](http://poser.pugx.org/vasildakov/mezzio-doctrine/license)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
+[![PHP Version Require](http://poser.pugx.org/vasildakov/mezzio-doctrine/require/php)](https://packagist.org/packages/vasildakov/mezzio-doctrine)
 ## Synopsis
 
 Simple Doctrine ORM integration for Mezzio.
