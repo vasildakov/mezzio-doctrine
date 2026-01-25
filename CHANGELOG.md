@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3] - 2026-01-25
+### Fixed
+- Updated phpunit tests and code coverage configuration, psr-12 compliance
+
 ## [1.0.2] - 2026-01-25
 ### Fixed
 - Added symfony/var-exporter to require section for compatibility
