@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.0.4] - 2026-01-25
+### Fixed
+- Updated readme documentation
+
+
 ## [1.0.3] - 2026-01-25
 ### Fixed
 - Updated phpunit tests and code coverage configuration, psr-12 compliance
