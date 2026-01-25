@@ -17,18 +17,17 @@ use Psr\Container\NotFoundExceptionInterface;
  */
 final class MigrationsFactory
 {
-    /**
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
-    public function __invoke(ContainerInterface $container): DependencyFactory
-    {
-        /** @todo from the doctrine config */
-        $config = new PhpFile('config/migrations.php');
+	/**
+	 * @throws ContainerExceptionInterface
+	 * @throws NotFoundExceptionInterface
+	 */
+	public function __invoke(ContainerInterface $container): DependencyFactory {
+		/** @todo from the doctrine config */
+		$config = new PhpFile('config/migrations.php');
 
-        return DependencyFactory::fromEntityManager(
-            $config,
-            new ExistingEntityManager($container->get(EntityManagerInterface::class))
-        );
-    }
+		return DependencyFactory::fromEntityManager(
+			$config,
+			new ExistingEntityManager($container->get(EntityManagerInterface::class))
+		);
+	}
 }
