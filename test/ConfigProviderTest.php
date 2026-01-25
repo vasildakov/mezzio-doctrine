@@ -17,7 +17,8 @@ use VasilDakov\Doctrine\ORM\EntityManagerFactory;
 class ConfigProviderTest extends TestCase
 {
 	#[Test]
-	public function invokeReturnsExpectedConfiguration(): void {
+	public function invokeReturnsExpectedConfiguration(): void
+	{
 		$configProvider = new ConfigProvider();
 		$config = $configProvider();
 
@@ -30,7 +31,8 @@ class ConfigProviderTest extends TestCase
 	}
 
 	#[Test]
-	public function dependenciesContainExpectedFactories(): void {
+	public function dependenciesContainExpectedFactories(): void
+	{
 		$configProvider = new ConfigProvider();
 		$config = $configProvider();
 		$dependencies = $config['dependencies'];
@@ -44,7 +46,8 @@ class ConfigProviderTest extends TestCase
 	}
 
 	#[Test]
-	public function commandsContainExpectedMappings(): void {
+	public function commandsContainExpectedMappings(): void
+	{
 		$configProvider = new ConfigProvider();
 		$config = $configProvider();
 		$commands = $config['laminas-cli']['commands'];

@@ -14,37 +14,37 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class LoadFixturesCommand extends Command
 {
-    /**
-     * @param array<string> $fixturePaths
-     */
-    public function __construct(
-        private readonly EntityManagerInterface $entityManager,
-        private readonly array $fixturePaths,
-    ) {
-        parent::__construct();
-    }
+	/**
+	 * @param array<string> $fixturePaths
+	 */
+	public function __construct(
+		private readonly EntityManagerInterface $entityManager,
+		private readonly array $fixturePaths,
+	) {
+		parent::__construct();
+	}
 
-    protected function configure(): void
-    {
-        $this->setName('fixtures:load')
-            ->setDescription('Load data fixtures');
-    }
+	protected function configure(): void
+	{
+		$this->setName('fixtures:load')
+			->setDescription('Load data fixtures');
+	}
 
-    /** @SuppressWarnings("PHPMD.UnusedFormalParameter") */
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $loader = new Loader();
-        foreach ($this->fixturePaths as $path) {
-            $loader->loadFromDirectory($path);
-        }
+	/** @SuppressWarnings("PHPMD.UnusedFormalParameter") */
+	protected function execute(InputInterface $input, OutputInterface $output): int
+	{
+		$loader = new Loader();
+		foreach ($this->fixturePaths as $path) {
+			$loader->loadFromDirectory($path);
+		}
 
-        //$loader->loadFromDirectory('src/App/src/Fixtures');
+		//$loader->loadFromDirectory('src/App/src/Fixtures');
 
-        $purger   = new ORMPurger();
-        $executor = new ORMExecutor($this->entityManager, $purger);
-        $executor->execute($loader->getFixtures());
+		$purger   = new ORMPurger();
+		$executor = new ORMExecutor($this->entityManager, $purger);
+		$executor->execute($loader->getFixtures());
 
-        $output->writeln('<info>Books fixtures loaded successfully!</info>');
-        return Command::SUCCESS;
-    }
+		$output->writeln('<info>Books fixtures loaded successfully!</info>');
+		return Command::SUCCESS;
+	}
 }

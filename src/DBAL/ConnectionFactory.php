@@ -20,7 +20,8 @@ final class ConnectionFactory
 	 * @throws ContainerExceptionInterface
 	 * @throws NotFoundExceptionInterface
 	 */
-	public function __invoke(ContainerInterface $container): Connection {
+	public function __invoke(ContainerInterface $container): Connection
+	{
 		$config = $container->get('config');
 
 		$connectionParams = $config['doctrine']['connection']['orm_default']['params']

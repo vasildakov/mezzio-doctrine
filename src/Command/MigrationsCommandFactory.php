@@ -17,28 +17,28 @@ use Psr\Container\NotFoundExceptionInterface;
 
 final class MigrationsCommandFactory implements FactoryInterface
 {
-    /**
-     * @inheritDoc
-     * @param ContainerInterface $container
-     * @param string $requestedName
-     * @param array|null $options
-     * @return DoctrineCommand
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): DoctrineCommand
-    {
-        /** @var array $config */
-        $config = $container->get('config')['doctrine']['migrations']['orm_default'];
+	/**
+	 * @inheritDoc
+	 * @param ContainerInterface $container
+	 * @param string $requestedName
+	 * @param array|null $options
+	 * @return DoctrineCommand
+	 * @throws ContainerExceptionInterface
+	 * @throws NotFoundExceptionInterface
+	 */
+	public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): DoctrineCommand
+	{
+		/** @var array $config */
+		$config = $container->get('config')['doctrine']['migrations']['orm_default'];
 
-        /** @var EntityManager $entityManager */
-        $entityManager = $container->get(EntityManagerInterface::class);
+		/** @var EntityManager $entityManager */
+		$entityManager = $container->get(EntityManagerInterface::class);
 
-        return new $requestedName(
-            DependencyFactory::fromEntityManager(
-                new ConfigurationArray($config),
-                new ExistingEntityManager($entityManager)
-            )
-        );
-    }
+		return new $requestedName(
+			DependencyFactory::fromEntityManager(
+				new ConfigurationArray($config),
+				new ExistingEntityManager($entityManager)
+			)
+		);
+	}
 }

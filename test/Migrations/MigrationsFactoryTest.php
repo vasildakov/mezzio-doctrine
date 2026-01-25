@@ -16,7 +16,8 @@ use VasilDakov\Doctrine\Migrations\MigrationsFactory;
 class MigrationsFactoryTest extends TestCase
 {
 	#[Test]
-	public function invokeReturnsDependencyFactory(): void {
+	public function invokeReturnsDependencyFactory(): void
+	{
 		$entityManager = $this->createMock(EntityManagerInterface::class);
 		$container = $this->createMock(ContainerInterface::class);
 		$container->method('get')
@@ -30,7 +31,8 @@ class MigrationsFactoryTest extends TestCase
 	}
 
 	#[Test]
-	public function invokeThrowsWhenEntityManagerNotFound(): void {
+	public function invokeThrowsWhenEntityManagerNotFound(): void
+	{
 		$this->expectException(NotFoundExceptionInterface::class);
 
 		$container = $this->createMock(ContainerInterface::class);
@@ -43,7 +45,8 @@ class MigrationsFactoryTest extends TestCase
 	}
 
 	#[Test]
-	public function invokeThrowsWhenContainerExceptionOccurs(): void {
+	public function invokeThrowsWhenContainerExceptionOccurs(): void
+	{
 		$this->expectException(ContainerExceptionInterface::class);
 
 		$container = $this->createMock(ContainerInterface::class);

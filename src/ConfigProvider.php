@@ -22,7 +22,8 @@ final class ConfigProvider
 	/**
 	 * @return array<string, mixed>
 	 */
-	public function __invoke(): array {
+	public function __invoke(): array
+	{
 		return [
 			'dependencies' => $this->getDependencies(),
 			'laminas-cli'  => [
@@ -61,7 +62,8 @@ final class ConfigProvider
 	 *
 	 * @return array<string,mixed>
 	 */
-	public function getDependencies(): array {
+	public function getDependencies(): array
+	{
 		return [
 			'invokables' => [],
 			'factories'  => [

@@ -17,22 +17,22 @@ use VasilDakov\Doctrine\Exception\ServiceNotFoundException;
  */
 final class DoctrineOrmCommandFactory
 {
-    /**
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
-     */
-    public function __invoke(ContainerInterface $container, string $requestedName): Command
-    {
-        if (! $container->has(EntityManagerInterface::class)) {
-            throw new ServiceNotFoundException('EntityManagerInterface service is not available');
-        }
+	/**
+	 * @throws ContainerExceptionInterface
+	 * @throws NotFoundExceptionInterface
+	 */
+	public function __invoke(ContainerInterface $container, string $requestedName): Command
+	{
+		if (! $container->has(EntityManagerInterface::class)) {
+			throw new ServiceNotFoundException('EntityManagerInterface service is not available');
+		}
 
-        $em = $container->get(EntityManagerInterface::class);
+		$em = $container->get(EntityManagerInterface::class);
 
-        // ORM 3: commands require an EntityManagerProvider
-        $provider = new SingleManagerProvider($em);
+		// ORM 3: commands require an EntityManagerProvider
+		$provider = new SingleManagerProvider($em);
 
-        // Most ORM commands accept the provider as 1st ctor arg
-        return new $requestedName($provider);
-    }
+		// Most ORM commands accept the provider as 1st ctor arg
+		return new $requestedName($provider);
+	}
 }
