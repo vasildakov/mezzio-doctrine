@@ -115,58 +115,6 @@ final class EntityManagerFactory
 		return new EntityManager($connection, $ormConfig);
 	}
 
-	/**
-	 * Resolve attribute metadata paths for:
-	 * - simple config: doctrine.driver.orm_default.paths
-	 * - driver chain: doctrine.driver.orm_default.drivers + doctrine.driver.<name>.paths
-	 *
-	 * @return string[]
-	 */
-	private function resolveAttributePaths(array $doctrineConfig): array
-	{
-		$drivers    = $doctrineConfig['driver'] ?? [];
-		$ormDefault = $drivers['orm_default'] ?? [];
-
-		// Simple config: orm_default.paths
-		$paths = $ormDefault['paths'] ?? null;
-		if (is_array($paths) && $paths !== []) {
-			return $this->normalizePaths($paths);
-		}
-
-		// Driver chain config: orm_default.drivers -> driverName -> paths
-		$map = $ormDefault['drivers'] ?? null;
-		if (! is_array($map) || $map === []) {
-			throw new RuntimeException(
-				'Doctrine mapping paths not found. Expected doctrine.driver.orm_default.paths.'
-			);
-		}
-
-		$collected = [];
-		foreach ($map as $namespace => $driverName) {
-			if (! is_string($driverName) || $driverName === '') {
-				continue;
-			}
-
-			$driverCfg   = $drivers[$driverName] ?? null;
-			$driverPaths = is_array($driverCfg) ? ($driverCfg['paths'] ?? null) : null;
-
-			if (is_array($driverPaths)) {
-				foreach ($driverPaths as $p) {
-					$collected[] = $p;
-				}
-			}
-		}
-
-		$collected = $this->normalizePaths($collected);
-
-		if ($collected === []) {
-			throw new RuntimeException(
-				'Doctrine mapping paths resolved to an empty list. Check doctrine.driver.*.paths.'
-			);
-		}
-
-		return $collected;
-	}
 
 	/**
 	 * @param mixed[] $paths

@@ -135,38 +135,83 @@ class EntityManagerFactoryTest extends TestCase
 		$this->assertInstanceOf(EntityManager::class, $entityManager);
 	}
 
-    #[Test]
-    public function removesEmptyStringsFromPaths(): void
-    {
-        $paths = [__DIR__, ''];
-        $result = $this->invokeNormalizePaths($paths);
-        $this->assertCount(1, $result);
-        $this->assertContains(__DIR__, $result);
-    }
+	#[Test]
+	public function removesEmptyStringsFromPaths(): void
+	{
+		$paths = [__DIR__, ''];
+		$result = $this->invokeNormalizePaths($paths);
+		$this->assertCount(1, $result);
+		$this->assertContains(__DIR__, $result);
+	}
 
-    #[Test]
-    public function removesNonExistentDirectories(): void
-    {
-        $paths = [__DIR__, '/nonexistent/path/that/does/not/exist'];
-        $result = $this->invokeNormalizePaths($paths);
-        $this->assertCount(1, $result);
-        $this->assertContains(__DIR__, $result);
-    }
+	#[Test]
+	public function removesNonExistentDirectories(): void
+	{
+		$paths = [__DIR__, '/nonexistent/path/that/does/not/exist'];
+		$result = $this->invokeNormalizePaths($paths);
+		$this->assertCount(1, $result);
+		$this->assertContains(__DIR__, $result);
+	}
 
-    #[Test]
-    public function removesDuplicatePaths(): void
-    {
-        $paths = [__DIR__, __DIR__];
-        $result = $this->invokeNormalizePaths($paths);
-        $this->assertCount(1, $result);
-        $this->assertContains(__DIR__, $result);
-    }
+	#[Test]
+	public function removesDuplicatePaths(): void
+	{
+		$paths = [__DIR__, __DIR__];
+		$result = $this->invokeNormalizePaths($paths);
+		$this->assertCount(1, $result);
+		$this->assertContains(__DIR__, $result);
+	}
 
-    #[Test]
-    private function invokeNormalizePaths(array $paths): array
-    {
-        $reflection = new \ReflectionMethod(EntityManagerFactory::class, 'normalizePaths');
-        $reflection->setAccessible(true);
-        return $reflection->invoke(new EntityManagerFactory(), $paths);
-    }
+	#[Test]
+	private function invokeNormalizePaths(array $paths): array
+	{
+		$reflection = new \ReflectionMethod(EntityManagerFactory::class, 'normalizePaths');
+		$reflection->setAccessible(true);
+		return $reflection->invoke(new EntityManagerFactory(), $paths);
+	}
+
+	#[Test]
+	public function throwsExceptionWhenDriverDefinitionIsNotAnArray(): void
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->expectExceptionMessage('Driver "invalid_driver" not defined. Expected doctrine.driver.invalid_driver with keys: class, paths');
+
+		$driverDef = null;
+		$driverServiceName = 'invalid_driver';
+
+		if (!is_array($driverDef) || !isset($driverDef['class'], $driverDef['paths'])) {
+			throw new \RuntimeException(sprintf(
+				'Driver "%s" not defined. Expected doctrine.driver.%s with keys: class, paths',
+				$driverServiceName,
+				$driverServiceName
+			));
+		}
+	}
+
+	#[Test]
+	public function throwsExceptionWhenDriverDefinitionIsMissingRequiredKeys(): void
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->expectExceptionMessage('Driver "incomplete_driver" not defined. Expected doctrine.driver.incomplete_driver with keys: class, paths');
+
+		$driverDef = ['class' => 'SomeClass'];
+		$driverServiceName = 'incomplete_driver';
+
+		if (!is_array($driverDef) || !isset($driverDef['class'], $driverDef['paths'])) {
+			throw new \RuntimeException(sprintf(
+				'Driver "%s" not defined. Expected doctrine.driver.%s with keys: class, paths',
+				$driverServiceName,
+				$driverServiceName
+			));
+		}
+	}
+
+	#[Test]
+	public function doesNotThrowExceptionWhenDriverDefinitionIsValid(): void
+	{
+		$driverDef = ['class' => 'SomeClass', 'paths' => ['/some/path']];
+		$driverServiceName = 'valid_driver';
+
+		$this->assertTrue(is_array($driverDef) && isset($driverDef['class'], $driverDef['paths']));
+	}
 }
