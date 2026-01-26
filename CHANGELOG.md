@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5] - 2026-01-26
+### Fixed
+- Updated and improved PHPUnit test coverage.
+
 ## [1.0.4] - 2026-01-25
 ### Fixed
 - Updated readme documentation
