@@ -1,6 +1,6 @@
 # Doctrine ORM integration for Mezzio.
 
-[![CI](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml)
+[![build](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/vasildakov/mezzio-doctrine/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/vasildakov/mezzio-doctrine/badge.svg?branch=main)](https://coveralls.io/github/vasildakov/mezzio-doctrine?branch=develop)
 [![Latest Stable Version](http://poser.pugx.org/vasildakov/mezzio-doctrine/v)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
 [![Total Downloads](http://poser.pugx.org/vasildakov/mezzio-doctrine/downloads)](https://packagist.org/packages/vasildakov/mezzio-doctrine) 
