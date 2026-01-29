@@ -6,8 +6,6 @@ namespace VasilDakov\Doctrine\Command;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,7 +16,7 @@ final class LoadFixturesCommand extends Command
 	 * @param array<string> $fixturePaths
 	 */
 	public function __construct(
-		private readonly EntityManagerInterface $entityManager,
+		private readonly ORMExecutor $executor,
 		private readonly array $fixturePaths,
 	) {
 		parent::__construct();
@@ -40,9 +38,9 @@ final class LoadFixturesCommand extends Command
 
 		//$loader->loadFromDirectory('src/App/src/Fixtures');
 
-		$purger   = new ORMPurger();
-		$executor = new ORMExecutor($this->entityManager, $purger);
-		$executor->execute($loader->getFixtures());
+		//$purger   = new ORMPurger();
+		//$executor = new ORMExecutor($this->entityManager, $purger);
+		$this->executor->execute($loader->getFixtures());
 
 		$output->writeln('<info>Books fixtures loaded successfully!</info>');
 		return Command::SUCCESS;

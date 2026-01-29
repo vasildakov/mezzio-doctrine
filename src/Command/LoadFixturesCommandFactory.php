@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace VasilDakov\Doctrine\Command;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -24,7 +24,7 @@ final class LoadFixturesCommandFactory
 		$paths = $config['doctrine']['fixtures']['paths'] ?? null;
 
 		return new LoadFixturesCommand(
-			$container->get(EntityManagerInterface::class),
+			$container->get(ORMExecutor::class),
 			array_values($paths),
 		);
 	}

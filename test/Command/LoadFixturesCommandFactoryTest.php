@@ -14,61 +14,61 @@ use VasilDakov\Doctrine\Command\LoadFixturesCommandFactory;
 
 class LoadFixturesCommandFactoryTest extends TestCase
 {
-    #[Test]
-    public function invokesCommandWithValidConfiguration(): void
-    {
-        $container = $this->createMock(ContainerInterface::class);
-        $entityManager = $this->createMock(EntityManagerInterface::class);
+	#[Test]
+	public function invokesCommandWithValidConfiguration(): void
+	{
+		$container = $this->createMock(ContainerInterface::class);
+		$entityManager = $this->createMock(EntityManagerInterface::class);
 
-        $container->expects($this->exactly(2))
-            ->method('get')
-            ->willReturnCallback(function ($id) use ($entityManager) {
-                return match ($id) {
-                    'config' => ['doctrine' => ['fixtures' => ['paths' => ['./data/fixtures']]]],
-                    EntityManagerInterface::class => $entityManager,
-                };
-            });
+		$container->expects($this->exactly(2))
+			->method('get')
+			->willReturnCallback(function ($id) use ($entityManager) {
+				return match ($id) {
+					'config' => ['doctrine' => ['fixtures' => ['paths' => ['./data/fixtures']]]],
+					EntityManagerInterface::class => $entityManager,
+				};
+			});
 
-        $factory = new LoadFixturesCommandFactory();
-        $command = $factory($container);
+		$factory = new LoadFixturesCommandFactory();
+		$command = $factory($container);
 
-        $this->assertInstanceOf(LoadFixturesCommand::class, $command);
-    }
+		$this->assertInstanceOf(LoadFixturesCommand::class, $command);
+	}
 
-    #[Test]
-    public function throwsExceptionWhenConfigIsMissing(): void
-    {
-        $this->expectException(NotFoundExceptionInterface::class);
+	#[Test]
+	public function throwsExceptionWhenConfigIsMissing(): void
+	{
+		$this->expectException(NotFoundExceptionInterface::class);
 
-        $container = $this->createMock(ContainerInterface::class);
+		$container = $this->createMock(ContainerInterface::class);
 
-        $container->expects($this->once())
-            ->method('get')
-            ->with('config')
-            ->willThrowException($this->createMock(NotFoundExceptionInterface::class));
+		$container->expects($this->once())
+			->method('get')
+			->with('config')
+			->willThrowException($this->createMock(NotFoundExceptionInterface::class));
 
-        $factory = new LoadFixturesCommandFactory();
-        $factory($container);
-    }
+		$factory = new LoadFixturesCommandFactory();
+		$factory($container);
+	}
 
-    #[Test]
-    public function handlesEmptyFixturePathsGracefully(): void
-    {
-        $container = $this->createMock(ContainerInterface::class);
-        $entityManager = $this->createMock(EntityManagerInterface::class);
+	#[Test]
+	public function handlesEmptyFixturePathsGracefully(): void
+	{
+		$container = $this->createMock(ContainerInterface::class);
+		$entityManager = $this->createMock(EntityManagerInterface::class);
 
-        $container->expects($this->exactly(2))
-            ->method('get')
-            ->willReturnCallback(function ($id) use ($entityManager) {
-                return match ($id) {
-                    'config' => ['doctrine' => ['fixtures' => ['paths' => []]]],
-                    EntityManagerInterface::class => $entityManager,
-                };
-            });
+		$container->expects($this->exactly(2))
+			->method('get')
+			->willReturnCallback(function ($id) use ($entityManager) {
+				return match ($id) {
+					'config' => ['doctrine' => ['fixtures' => ['paths' => []]]],
+					EntityManagerInterface::class => $entityManager,
+				};
+			});
 
-        $factory = new LoadFixturesCommandFactory();
-        $command = $factory($container);
+		$factory = new LoadFixturesCommandFactory();
+		$command = $factory($container);
 
-        $this->assertInstanceOf(LoadFixturesCommand::class, $command);
-    }
+		$this->assertInstanceOf(LoadFixturesCommand::class, $command);
+	}
 }

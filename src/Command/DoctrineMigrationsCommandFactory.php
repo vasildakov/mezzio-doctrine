@@ -4,17 +4,14 @@ declare(strict_types=1);
 
 namespace VasilDakov\Doctrine\Command;
 
-use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use Doctrine\Migrations\DependencyFactory;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\Console\Command\Command;
 use Webmozart\Assert\Assert;
 
-/**
- * Factory for Doctrine ORM Console Commands
- */
-final class DoctrineOrmCommandFactory
+final class DoctrineMigrationsCommandFactory
 {
 	/**
 	 * @throws ContainerExceptionInterface
@@ -25,12 +22,12 @@ final class DoctrineOrmCommandFactory
 		Assert::classExists($requestedName);
 		Assert::subclassOf($requestedName, Command::class);
 
-		$provider = $container->get(SingleManagerProvider::class);
-		Assert::isInstanceOf($provider, SingleManagerProvider::class);
+		$df = $container->get(DependencyFactory::class);
+		Assert::isInstanceOf($df, DependencyFactory::class);
 
-		/** @var Command $command */
-		$command = new $requestedName($provider);
+		/** @var Command $cmd */
+		$cmd = new $requestedName($df);
 
-		return $command;
+		return $cmd;
 	}
 }
