@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace VasilDakov\Doctrine\ORM;
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Types\Exception\TypesException;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Configuration as OrmConfiguration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Proxy\ProxyFactory;
@@ -32,11 +35,21 @@ final class EntityManagerFactory
 	/**
 	 * @throws ContainerExceptionInterface
 	 * @throws NotFoundExceptionInterface
+	 * @throws TypesException
+	 * @throws Exception
 	 */
 	public function __invoke(ContainerInterface $container): EntityManager
 	{
 		$config   = $container->get('config');
 		$doctrine = $config['doctrine'] ?? [];
+
+		$types = $doctrine['types'] ?? [];
+		foreach ($types as $name => $class) {
+			if (!Type::hasType($name)) {
+				Type::addType($name, $class);
+			}
+		}
+
 
 		// 1) DBAL Connection (from your config)
 		$connParams = $doctrine['connection']['orm_default']['params']
